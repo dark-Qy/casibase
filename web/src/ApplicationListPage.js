@@ -168,6 +168,7 @@ spec:
       name: `application_${randomName}`,
       createdTime: moment().format(),
       displayName: `${i18next.t("application:New Application")} - ${randomName}`,
+      namespace: `casibase-application-${randomName}`,
       description: "",
       template: this.state.templates[0]?.name || "",
       parameters: defaultParameters,

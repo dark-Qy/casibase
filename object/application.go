@@ -119,10 +119,10 @@ func UpdateApplication(id string, application *Application) (bool, error) {
 	return affected != 0, nil
 }
 
-func UpdateApplicationStatus(owner, name, status string) {
+func UpdateApplicationStatus(owner, name, status string) error {
 	application, err := getApplication(owner, name)
 	if err != nil || application == nil {
-		return
+		return fmt.Errorf("failed to get application %s/%s: %v", owner, name, err)
 	}
 
 	application.Status = status
@@ -130,8 +130,10 @@ func UpdateApplicationStatus(owner, name, status string) {
 
 	_, err = UpdateApplication(fmt.Sprintf("%s/%s", owner, name), application)
 	if err != nil {
-		return
+		return fmt.Errorf("failed to update application %s/%s status to %s: %v", owner, name, status, err)
 	}
+
+	return nil
 }
 
 func AddApplication(application *Application) (bool, error) {
@@ -287,7 +289,11 @@ func DeployApplication(application *Application) (bool, error) {
 		return false, fmt.Errorf("failed to deploy manifest: %v", err)
 	}
 
-	UpdateApplicationStatus(application.Owner, application.Name, StatusPending)
+	err = UpdateApplicationStatus(application.Owner, application.Name, StatusPending)
+	if err != nil {
+		return true, err
+	}
+
 	return true, nil
 }
 
@@ -313,7 +319,11 @@ func UndeployApplication(owner, name string) (bool, error) {
 		return false, fmt.Errorf("failed to delete namespace: %v", err)
 	}
 
-	UpdateApplicationStatus(owner, name, StatusTerminating)
+	err = UpdateApplicationStatus(owner, name, StatusTerminating)
+	if err != nil {
+		return true, err
+	}
+
 	return true, nil
 }
 
@@ -337,7 +347,10 @@ func DeployApplicationSync(application *Application) (bool, error) {
 	for {
 		select {
 		case <-ctx.Done():
-			UpdateApplicationStatus(application.Owner, application.Name, "Failed")
+			err := UpdateApplicationStatus(application.Owner, application.Name, StatusFailed)
+			if err != nil {
+				return false, err
+			}
 			return false, fmt.Errorf("deployment timeout: application did not become ready within 10 minutes")
 		case <-ticker.C:
 			status, err := GetApplicationStatus(application.Owner, application.Name)
@@ -418,7 +431,7 @@ func GetApplicationStatus(owner, name string) (string, error) {
 	)
 	if err != nil {
 		if errors.IsNotFound(err) {
-			UpdateApplicationStatus(owner, name, StatusNotDeployed)
+			err = UpdateApplicationStatus(owner, name, StatusNotDeployed)
 			return StatusNotDeployed, nil
 		}
 		return StatusUnknown, err
@@ -430,11 +443,17 @@ func GetApplicationStatus(owner, name string) (string, error) {
 		deployments, _ := k8sClient.clientSet.AppsV1().Deployments(namespace).List(context.TODO(), metav1.ListOptions{})
 
 		if len(pods.Items) == 0 && len(services.Items) == 0 && len(deployments.Items) == 0 {
-			UpdateApplicationStatus(owner, name, StatusNotDeployed)
+			err := UpdateApplicationStatus(owner, name, StatusNotDeployed)
+			if err != nil {
+				return "", err
+			}
 			return StatusNotDeployed, nil
 		}
 
-		UpdateApplicationStatus(owner, name, StatusTerminating)
+		err = UpdateApplicationStatus(owner, name, StatusTerminating)
+		if err != nil {
+			return "", err
+		}
 		return StatusTerminating, nil
 	}
 
@@ -447,19 +466,28 @@ func GetApplicationStatus(owner, name string) (string, error) {
 	}
 
 	if len(deployments.Items) == 0 {
-		UpdateApplicationStatus(owner, name, StatusNotDeployed)
+		err := UpdateApplicationStatus(owner, name, StatusNotDeployed)
+		if err != nil {
+			return "", err
+		}
 		return StatusNotDeployed, nil
 	}
 
 	// Check if all deployments are ready
 	for _, deployment := range deployments.Items {
 		if deployment.Status.ReadyReplicas < deployment.Status.Replicas {
-			UpdateApplicationStatus(owner, name, StatusPending)
+			err := UpdateApplicationStatus(owner, name, StatusPending)
+			if err != nil {
+				return "", err
+			}
 			return StatusPending, nil
 		}
 	}
 
-	UpdateApplicationStatus(owner, name, StatusRunning)
+	err = UpdateApplicationStatus(owner, name, StatusRunning)
+	if err != nil {
+		return "", err
+	}
 	return StatusRunning, nil
 }
 
