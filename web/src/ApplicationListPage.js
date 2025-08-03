@@ -14,7 +14,7 @@
 
 import React from "react";
 import {Link} from "react-router-dom";
-import {Alert, Button, Popconfirm, Table, Tag, Tooltip} from "antd";
+import {Alert, Button, Popconfirm, Switch, Table, Tooltip} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import moment from "moment";
 import BaseListPage from "./BaseListPage";
@@ -307,15 +307,15 @@ spec:
         },
       },
       {
-        title: i18next.t("general:Managed"),
+        title: i18next.t("general:Active"),
         dataIndex: "managed",
         key: "managed",
         width: "100px",
         sorter: (a, b) => a.managed.localeCompare(b.managed),
         render: (text, record, index) => {
-          return record.managed ?
-            <Tag color="green">{i18next.t("general:Yes")}</Tag> :
-            <Tag color="default">{i18next.t("general:No")}</Tag>;
+          return (
+            <Switch checked={record.managed} disabled={true} />
+          );
         },
       },
       {
@@ -333,10 +333,14 @@ spec:
         fixed: (Setting.isMobile()) ? "false" : "right",
         render: (text, record, index) => {
           return (
-            <div>
-              <Button style={{marginTop: "10px", marginBottom: "10px", marginRight: "10px"}} type={record.managed ? "default" : "primary"} disabled={!record.managed} onClick={!record.managed ? undefined : () => this.props.history.push(`/applications/${record.name}`)}>
-                {i18next.t("general:Edit")}
-              </Button>
+            <div style={{minHeight: "55px"}}>
+              {
+                record.managed ? (
+                  <Button style={{marginTop: "10px", marginBottom: "10px", marginRight: "10px"}} type="primary" onClick={() => this.props.history.push(`/applications/${record.name}`)}>
+                    {i18next.t("general:Edit")}
+                  </Button>
+                ) : null
+              }
               {
                 record.managed ? (
                   record.status === "Not Deployed" ? (
