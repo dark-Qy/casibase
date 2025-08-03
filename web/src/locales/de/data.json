@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Gehen Sie zur Einstellungsseite, indem Sie auf die untere Schaltfläche \"Mein Konto\" klicken.",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Klicken Sie auf die Schaltfläche \"Passwort ändern...\", um Ihr Passwort zu ändern. Schließen Sie anschließend die Einstellungsseite.",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. kehren Sie zu dieser Seite zurück und aktualisieren Sie sie, indem Sie die F5-Taste drücken. Diese Warnung sollte verschwinden.",
     "4. If you encounter any issues, please contact your administrator.": "4. Bei Problemen wenden Sie sich bitte an Ihren Administrator.",
     "My Account": "Mein Konto",
@@ -206,6 +206,7 @@
     "Loading...": "Lade...",
     "Logging & Auditing": "Protokollierung & Auditing",
     "Machines": "Server",
+    "Managed": "Managed",
     "Menu": "Menü",
     "Message": "Nachricht",
     "Message - Tooltip": "Nachrichtenbenachrichtigungstemplate (HTML-Format), unterstützt Variablen wie ${taskName}",
@@ -221,6 +222,7 @@
     "Namespace - Tooltip": "Namespace",
     "Network": "Netzwerk",
     "Network - Tooltip": "Blockchain-Netzwerktyp",
+    "No": "No",
     "No audio data was captured. Please try again": "Keine Audio-Daten erfasst. Bitte versuchen Sie es erneut",
     "No.": "Nr.",
     "Node": "Knoten",
@@ -351,6 +353,7 @@
     "View": "Anzeigen",
     "Workbench": "Arbeitsplattform",
     "Workflows": "Arbeitsflüsse",
+    "Yes": "Yes",
     "Zone": "Zone",
     "Zone - Tooltip": "Verfügbare Zone",
     "empty": "leer",

@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. 下記の「マイアカウント」ボタンをクリックして設定ページに移動してください。",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. 「パスワードを変更...」ボタンをクリックしてパスワードを変更してください。その後、設定ページを閉じてください。",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. このページに戻り、F5キーを押して更新してください。この警告メッセージが消えるはずです。",
     "4. If you encounter any issues, please contact your administrator.": "4. 問題が発生した場合は、管理者にご連絡ください。",
     "My Account": "マイアカウント",
@@ -206,6 +206,7 @@
     "Loading...": "読み込み中...",
     "Logging & Auditing": "ログ & 監査",
     "Machines": "マシン",
+    "Managed": "Managed",
     "Menu": "メニュー",
     "Message": "メッセージ",
     "Message - Tooltip": "メッセージ通知テンプレート（HTML形式）、${taskName}のような変数をサポート",
@@ -221,6 +222,7 @@
     "Namespace - Tooltip": "名前空間",
     "Network": "ネットワーク",
     "Network - Tooltip": "ブロックチェーンネットワークタイプ",
+    "No": "No",
     "No audio data was captured. Please try again": "オーディオデータがキャプチャされませんでした。もう一度試してください",
     "No.": "番号",
     "Node": "ノード",
@@ -351,6 +353,7 @@
     "View": "表示",
     "Workbench": "ワークベンチ",
     "Workflows": "ワークフロー",
+    "Yes": "Yes",
     "Zone": "ゾーン",
     "Zone - Tooltip": "利用可能ゾーン",
     "empty": "空",

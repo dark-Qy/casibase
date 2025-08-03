@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Klik tombol \"Akun Saya\" di bawah ini untuk masuk ke halaman pengaturan Anda.",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Klik tombol \"Ubah kata sandi...\" untuk mengubah kata sandi Anda. Kemudian tutup halaman pengaturan.",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. Kembali ke halaman ini dan perbarui dengan menekan tombol F5. Pesan peringatan ini seharusnya akan hilang.",
     "4. If you encounter any issues, please contact your administrator.": "4. Jika Anda menghadapi masalah, silakan hubungi administrator Anda.",
     "My Account": "Akun Saya",
@@ -206,6 +206,7 @@
     "Loading...": "Sedang memuat...",
     "Logging & Auditing": "Pencatatan & audit",
     "Machines": "Host",
+    "Managed": "Managed",
     "Menu": "Menu",
     "Message": "Pesan",
     "Message - Tooltip": "Template notifikasi pesan (format HTML), mendukung variabel seperti ${taskName}",
@@ -221,6 +222,7 @@
     "Namespace - Tooltip": "Ruang nama",
     "Network": "Jaringan",
     "Network - Tooltip": "Tipe jaringan blockchain",
+    "No": "No",
     "No audio data was captured. Please try again": "Tidak ada data audio yang tercapture. Coba lagi",
     "No.": "Nomor",
     "Node": "Node",
@@ -351,6 +353,7 @@
     "View": "Lihat",
     "Workbench": "Meja kerja",
     "Workflows": "Alur kerja",
+    "Yes": "Yes",
     "Zone": "Zona",
     "Zone - Tooltip": "Zona tersedia",
     "empty": "Kosong",

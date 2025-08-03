@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. 아래의 \"내 계정\" 버튼을 클릭하여 설정 페이지로 이동하세요.",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. \"비밀번호 변경...\" 버튼을 클릭하여 비밀번호를 변경하세요. 그런 다음 설정 페이지를 닫습니다.",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. 이 페이지로 돌아가 F5 키를 눌러 새로 고칩니다. 이 경고 메시지가 사라질 것입니다.",
     "4. If you encounter any issues, please contact your administrator.": "4. 문제가 발생하면 관리자에게 문의하세요.",
     "My Account": "내 계정",
@@ -206,6 +206,7 @@
     "Loading...": "로딩 중...",
     "Logging & Auditing": "로깅 & 감사",
     "Machines": "호스트",
+    "Managed": "Managed",
     "Menu": "메뉴",
     "Message": "메시지",
     "Message - Tooltip": "메시지 알림 템플릿(HTML 형식), ${taskName}과 같은 변수를 지원함",
@@ -221,6 +222,7 @@
     "Namespace - Tooltip": "네임스페이스",
     "Network": "네트워크",
     "Network - Tooltip": "블록체인 네트워크 유형",
+    "No": "No",
     "No audio data was captured. Please try again": "오디오 데이터가 캡처되지 않았습니다. 다시 시도하세요",
     "No.": "순번",
     "Node": "노드",
@@ -351,6 +353,7 @@
     "View": "보기",
     "Workbench": "작업대",
     "Workflows": "워크플로",
+    "Yes": "Yes",
     "Zone": "지역",
     "Zone - Tooltip": "사용 가능한 지역",
     "empty": "빈",
