@@ -43,10 +43,7 @@ type K8sClient struct {
 	configText    string
 }
 
-var (
-	k8sClient    *K8sClient
-	lastSyncTime time.Time
-)
+var k8sClient *K8sClient
 
 func init() {
 	k8sClient = nil

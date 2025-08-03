@@ -40,6 +40,8 @@ const (
 	NamespaceFormat   = "casibase-%s"
 )
 
+var lastSyncTime time.Time
+
 func UpdateApplicationStatus(owner string, name string, status string) error {
 	application, err := getApplication(owner, name)
 	if err != nil {
