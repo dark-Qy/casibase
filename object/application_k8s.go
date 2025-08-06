@@ -220,7 +220,7 @@ func DeployApplicationSync(application *Application) (bool, error) {
 	}
 
 	// Wait for deployment to be ready (with timeout)
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancel()
 
 	ticker := time.NewTicker(5 * time.Second)

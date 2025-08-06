@@ -34,6 +34,7 @@ type Application struct {
 	Parameters  string `xorm:"mediumtext" json:"parameters"`
 	Status      string `xorm:"varchar(50)" json:"status"`     // Running, Pending, Failed, Not Deployed
 	Namespace   string `xorm:"varchar(100)" json:"namespace"` // Kubernetes namespace (auto-generated)
+	Access      string `xorm:"varchar(255)" json:"access"`    // Available service access URL
 }
 
 func GetApplications(owner string) ([]*Application, error) {

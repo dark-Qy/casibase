@@ -221,6 +221,14 @@ func (c *ApiController) DeployApplication() {
 		return
 	}
 
+	// Get application details to update access field
+	owner, name := util.GetOwnerAndNameFromId(id)
+	_, err = object.GetApplicationDetails(owner, name)
+	if err != nil {
+		c.ResponseError(err.Error())
+		return
+	}
+
 	c.ResponseOk(success)
 }
 
@@ -275,4 +283,24 @@ func (c *ApiController) GetApplicationStatus() {
 	}
 
 	c.ResponseOk(status)
+}
+
+// GetApplicationDetails
+// @Title GetApplicationDetails
+// @Tag Application API
+// @Description get application connection details
+// @Param id query string true "The id (owner/name) of the application"
+// @Success 200 {object} object.ApplicationDetails The Response object
+// @router /get-application-details [get]
+func (c *ApiController) GetApplicationDetails() {
+	id := c.Input().Get("id")
+	owner, name := util.GetOwnerAndNameFromId(id)
+
+	details, err := object.GetApplicationDetails(owner, name)
+	if err != nil {
+		c.ResponseError(err.Error())
+		return
+	}
+
+	c.ResponseOk(details)
 }

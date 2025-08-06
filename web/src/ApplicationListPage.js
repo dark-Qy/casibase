@@ -15,7 +15,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Alert, Button, Popconfirm, Table, Tooltip} from "antd";
-import {DeleteOutlined} from "@ant-design/icons";
+import {DeleteOutlined, LinkOutlined} from "@ant-design/icons";
 import moment from "moment";
 import BaseListPage from "./BaseListPage";
 import * as Setting from "./Setting";
@@ -308,6 +308,25 @@ spec:
         },
       },
       {
+        title: i18next.t("application:Access"),
+        dataIndex: "access",
+        key: "access",
+        width: "140px",
+        render: (text, record, index) => {
+          if (!text || record.status === "Not Deployed") {
+            return null;
+          }
+          return (
+            <a target="_blank" rel="noreferrer" href={`http://${text}`} style={{display: "flex", alignItems: "center"}}>
+              <LinkOutlined style={{marginRight: 4}} />
+              <Tooltip title={text}>
+                {text}
+              </Tooltip>
+            </a>
+          );
+        },
+      },
+      {
         title: i18next.t("general:Namespace"),
         dataIndex: "namespace",
         key: "namespace",
@@ -335,6 +354,13 @@ spec:
                       {i18next.t("application:Undeploy")}
                     </Button>
                   </Popconfirm>
+                )
+              }
+              {
+                record.status !== "Not Deployed" && (
+                  <Button style={{marginBottom: "10px", marginRight: "10px"}} onClick={() => this.props.history.push(`/applications/${record.name}/view`, {application: record})}>
+                    {i18next.t("general:View")}
+                  </Button>
                 )
               }
               <Popconfirm

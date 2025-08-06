@@ -100,3 +100,13 @@ export function getApplicationStatus(id) {
     },
   }).then(res => res.json());
 }
+
+export function getApplicationDetails(owner, name) {
+  return fetch(`${Setting.ServerUrl}/api/get-application-details?id=${owner}/${name}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Accept-Language": Setting.getAcceptLanguage(),
+    },
+  }).then(res => res.json());
+}
