@@ -16,7 +16,6 @@
   "application": {
     "Deploy": "Déployer",
     "Edit Application": "Modifier l'application",
-    "Environment Variables": "Variables d'environnement",
     "Failed": "Échec",
     "New Application": "Nouvelle application",
     "Not Deployed": "Non déployé",

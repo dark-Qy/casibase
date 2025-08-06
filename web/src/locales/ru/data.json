@@ -16,7 +16,6 @@
   "application": {
     "Deploy": "Развернуть",
     "Edit Application": "Редактировать приложение",
-    "Environment Variables": "Переменные среды",
     "Failed": "Сбой",
     "New Application": "Новое приложение",
     "Not Deployed": "Не развернуто",

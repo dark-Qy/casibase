@@ -216,18 +216,18 @@ class ApplicationViewPage extends React.Component {
                         {port.port}/{port.protocol}
                         {port.nodePort && ` → ${port.nodePort}`}
                       </Text>
-                      {port.accessUrl && (
+                      {port.url && (
                         <Button icon={<CopyOutlined />} size="small"
-                          onClick={() => this.copyToClipboard(port.accessUrl)}>
+                          onClick={() => this.copyToClipboard(port.url)}>
                           {i18next.t("general:Copy")}
                         </Button>
                       )}
                     </div>
-                    {port.accessUrl && (
+                    {port.url && (
                       <div style={{marginTop: 4}}>
                         <Text type="secondary" style={{fontSize: "12px"}}>
-                          <a target="_blank" rel="noreferrer" href={`http://${port.accessUrl}`}>
-                            {port.accessUrl}
+                          <a target="_blank" rel="noreferrer" href={`http://${port.url}`}>
+                            {port.url}
                           </a>
                         </Text>
                       </div>
@@ -280,7 +280,7 @@ class ApplicationViewPage extends React.Component {
     ];
 
     return (
-      <Card size="small" title={i18next.t("application:Environment Variables")} style={{marginBottom: 16}}>
+      <Card size="small" title={i18next.t("application:Parameters")} style={{marginBottom: 16}}>
         <Table dataSource={this.state.views.credentials} columns={columns}
           pagination={false} size="small" rowKey="name" />
       </Card>

@@ -47,11 +47,11 @@ type ServiceView struct {
 }
 
 type ServicePort struct {
-	Name      string `json:"name"`
-	Port      int32  `json:"port"`
-	NodePort  int32  `json:"nodePort,omitempty"`
-	Protocol  string `json:"protocol"`
-	AccessURL string `json:"accessUrl,omitempty"`
+	Name     string `json:"name"`
+	Port     int32  `json:"port"`
+	NodePort int32  `json:"nodePort,omitempty"`
+	Protocol string `json:"protocol"`
+	URL      string `json:"url,omitempty"`
 }
 
 type DeploymentView struct {
@@ -265,7 +265,7 @@ func getServices(namespace string, nodeIPs []string) ([]ServiceView, error) {
 			if port.NodePort != 0 {
 				servicePort.NodePort = port.NodePort
 				if view.ExternalHost != "" {
-					servicePort.AccessURL = fmt.Sprintf("%s:%d", view.ExternalHost, port.NodePort)
+					servicePort.URL = fmt.Sprintf("%s:%d", view.ExternalHost, port.NodePort)
 				}
 			}
 

@@ -16,7 +16,6 @@
   "application": {
     "Deploy": "Terapkan",
     "Edit Application": "Edit Aplikasi",
-    "Environment Variables": "Variabel Lingkungan",
     "Failed": "Gagal",
     "New Application": "Aplikasi Baru",
     "Not Deployed": "Tidak di-deploy",

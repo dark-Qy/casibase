@@ -16,7 +16,6 @@
   "application": {
     "Deploy": "デプロイ",
     "Edit Application": "アプリケーションの編集",
-    "Environment Variables": "環境変数",
     "Failed": "失敗",
     "New Application": "新規アプリケーション",
     "Not Deployed": "未デプロイ",

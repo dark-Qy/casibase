@@ -16,7 +16,6 @@
   "application": {
     "Deploy": "배포",
     "Edit Application": "애플리케이션 편집",
-    "Environment Variables": "환경 변수",
     "Failed": "실패",
     "New Application": "새 애플리케이션",
     "Not Deployed": "배포되지 않음",

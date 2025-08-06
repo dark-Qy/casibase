@@ -16,7 +16,6 @@
   "application": {
     "Deploy": "部署",
     "Edit Application": "编辑应用",
-    "Environment Variables": "环境变量",
     "Failed": "失败",
     "New Application": "新建应用",
     "Not Deployed": "未部署",

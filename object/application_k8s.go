@@ -220,8 +220,8 @@ func GetURL(namespace string) (string, error) {
 	// Find first available access URL from services
 	for _, service := range services {
 		for _, port := range service.Ports {
-			if port.AccessURL != "" {
-				return port.AccessURL, nil
+			if port.URL != "" {
+				return port.URL, nil
 			}
 		}
 	}
