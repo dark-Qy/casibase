@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. 点击下方的\"我的账户\"按钮进入设置页面。",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. 点击\"修改密码...\"按钮更改您的密码。然后关闭设置页面。",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. 返回此页面，并按F5键刷新。这个警告信息会自行消失。",
     "4. If you encounter any issues, please contact your administrator.": "4. 如果还有任何问题，请联系管理员。",
     "My Account": "我的账户",
@@ -14,10 +14,7 @@
     "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions": "系统检测到您正在使用默认密码，存在安全隐患。请立即修改您的密码。以下是具体操作"
   },
   "application": {
-    "Access": "访问",
-    "Application Details": "应用详情",
     "Deploy": "部署",
-    "Deployments": "部署",
     "Edit Application": "编辑应用",
     "Environment Variables": "环境变量",
     "Failed": "失败",
@@ -134,7 +131,6 @@
     "Avatar": "头像",
     "Avatar - Tooltip": "头像对应的URL",
     "Back Home": "返回首页",
-    "Basic": "基本",
     "Block": "区块",
     "Block - Tooltip": "关联数据区块标识",
     "Cancel": "取消",
@@ -348,7 +344,6 @@
     "Username - Tooltip": "登录用户名",
     "Users": "用户",
     "Users - Tooltip": "添加聊天参与者（多选）",
-    "Value": "值",
     "Vectors": "向量",
     "Vectors failed to generate": "向量生成失败",
     "Vectors generated successfully": "向量生成成功",

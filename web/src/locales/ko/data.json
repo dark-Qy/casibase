@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. 아래의 \"내 계정\" 버튼을 클릭하여 설정 페이지로 이동하세요.",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. \"비밀번호 변경...\" 버튼을 클릭하여 비밀번호를 변경하세요. 그런 다음 설정 페이지를 닫습니다.",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. 이 페이지로 돌아가 F5 키를 눌러 새로 고칩니다. 이 경고 메시지가 사라질 것입니다.",
     "4. If you encounter any issues, please contact your administrator.": "4. 문제가 발생하면 관리자에게 문의하세요.",
     "My Account": "내 계정",
@@ -14,10 +14,7 @@
     "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions": "시스템에서 기본 비밀번호를 사용하고 있다는 것을 감지했습니다. 이는 보안상 위험합니다. 즉시 비밀번호를 변경해야 합니다. 다음은 지침입니다"
   },
   "application": {
-    "Access": "액세스",
-    "Application Details": "애플리케이션 세부 정보",
     "Deploy": "배포",
-    "Deployments": "배포",
     "Edit Application": "애플리케이션 편집",
     "Environment Variables": "환경 변수",
     "Failed": "실패",
@@ -134,7 +131,6 @@
     "Avatar": "아바타",
     "Avatar - Tooltip": "아바타에 해당하는 URL",
     "Back Home": "홈으로 돌아가기",
-    "Basic": "기본",
     "Block": "블록",
     "Block - Tooltip": "연관 데이터 블록 식별자",
     "Cancel": "취소",
@@ -348,7 +344,6 @@
     "Username - Tooltip": "로그인 사용자 이름",
     "Users": "사용자",
     "Users - Tooltip": "채팅 참가자를 추가합니다(다중 선택)",
-    "Value": "값",
     "Vectors": "벡터",
     "Vectors failed to generate": "벡터 생성 실패",
     "Vectors generated successfully": "벡터 생성 성공",

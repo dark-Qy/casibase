@@ -15,48 +15,48 @@
 import React from "react";
 import {Button, Card, Descriptions, Table, Tag, Typography} from "antd";
 import {CopyOutlined} from "@ant-design/icons";
-import * as ApplicationBackend from "../backend/ApplicationBackend";
-import * as Setting from "../Setting";
+import * as ApplicationBackend from "./backend/ApplicationBackend";
+import * as Setting from "./Setting";
 import i18next from "i18next";
 import copy from "copy-to-clipboard";
 
 const {Text} = Typography;
 
-class ApplicationDetailsPage extends React.Component {
+class ApplicationViewPage extends React.Component {
   constructor(props) {
     super(props);
     const application = props.application || (props.location && props.location.state ? props.location.state.application : null);
     this.state = {
       application: application,
-      details: null,
+      views: null,
       loading: false,
       error: null,
     };
   }
 
   componentDidMount() {
-    this.getDetails();
+    this.getView();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.application !== this.props.application) {
       this.setState({application: this.props.application});
-      this.getDetails();
+      this.getView();
     }
   }
 
-  getDetails() {
+  getView() {
     if (!this.state.application || this.state.application.status === "Not Deployed") {
-      this.setState({details: null, error: null});
+      this.setState({views: null, error: null});
       return;
     }
 
     this.setState({loading: true, error: null});
 
-    ApplicationBackend.getApplicationDetails(this.state.application.owner, this.state.application.name)
+    ApplicationBackend.getApplicationView(this.state.application.owner, this.state.application.name)
       .then((res) => {
         if (res.status === "ok") {
-          this.setState({details: res.data, loading: false});
+          this.setState({views: res.data, loading: false});
         } else {
           this.setState({error: res.msg, loading: false});
         }
@@ -72,24 +72,24 @@ class ApplicationDetailsPage extends React.Component {
   };
 
   renderBasic() {
-    if (!this.state.details) {
+    if (!this.state.views) {
       return null;
     }
 
     return (
-      <Card size="small" title={i18next.t("general:Basic")} style={{marginBottom: 16}}>
+      <Card size="small" title={i18next.t("general:Description")} style={{marginBottom: 16}}>
         <Descriptions size="small" column={2}>
           <Descriptions.Item label={i18next.t("general:Name")}>
             <Text>{this.state.application.name}</Text>
           </Descriptions.Item>
           <Descriptions.Item label={i18next.t("general:Namespace")}>
-            <Text>{this.state.details.namespace}</Text>
+            <Text>{this.state.views.namespace}</Text>
           </Descriptions.Item>
           <Descriptions.Item label={i18next.t("general:Status")}>
-            {Setting.getApplicationStatusTag(this.state.details.status)}
+            {Setting.getApplicationStatusTag(this.state.views.status)}
           </Descriptions.Item>
           <Descriptions.Item label={i18next.t("general:Created time")}>
-            <Text>{this.state.details.createdTime}</Text>
+            <Text>{this.state.views.createdTime}</Text>
           </Descriptions.Item>
         </Descriptions>
       </Card>
@@ -97,7 +97,7 @@ class ApplicationDetailsPage extends React.Component {
   }
 
   renderDeployments() {
-    if (!this.state.details || !this.state.details.deployments || this.state.details.deployments.length === 0) {
+    if (!this.state.views || !this.state.views.deployments || this.state.views.deployments.length === 0) {
       return null;
     }
 
@@ -158,20 +158,20 @@ class ApplicationDetailsPage extends React.Component {
     ];
 
     return (
-      <Card size="small" title={i18next.t("application:Deployments")} style={{marginBottom: 16}}>
-        <Table dataSource={this.state.details.deployments} columns={columns} pagination={false} size="small" rowKey="name" />
+      <Card size="small" title={i18next.t("application:Deploy")} style={{marginBottom: 16}}>
+        <Table dataSource={this.state.views.deployments} columns={columns} pagination={false} size="small" rowKey="name" />
       </Card>
     );
   }
 
   renderConnections() {
-    if (!this.state.details || !this.state.details.services || this.state.details.services.length === 0) {
+    if (!this.state.views || !this.state.views.services || this.state.views.services.length === 0) {
       return null;
     }
 
     return (
       <Card size="small" title={i18next.t("general:Connections")} style={{marginBottom: 16}}>
-        {this.state.details.services.map((service, index) => (
+        {this.state.views.services.map((service, index) => (
           <Card key={index} size="small"
             title={<span>{service.name}<Tag style={{marginLeft: 8}} color="blue">{service.type}</Tag></span>}
             style={{marginBottom: 12}} type="inner">
@@ -214,7 +214,7 @@ class ApplicationDetailsPage extends React.Component {
                       <Text style={{marginRight: 8, flex: 1}}>
                         {port.name ? `${port.name}: ` : ""}
                         {port.port}/{port.protocol}
-                        {port.nodePort && ` (NodePort: ${port.nodePort})`}
+                        {port.nodePort && ` → ${port.nodePort}`}
                       </Text>
                       {port.accessUrl && (
                         <Button icon={<CopyOutlined />} size="small"
@@ -243,7 +243,7 @@ class ApplicationDetailsPage extends React.Component {
   }
 
   renderCredentials() {
-    if (!this.state.details || !this.state.details.credentials || this.state.details.credentials.length === 0) {
+    if (!this.state.views || !this.state.views.credentials || this.state.views.credentials.length === 0) {
       return null;
     }
 
@@ -257,7 +257,7 @@ class ApplicationDetailsPage extends React.Component {
         render: (text) => <Text>{text}</Text>,
       },
       {
-        title: i18next.t("general:Value"),
+        title: i18next.t("general:Data"),
         dataIndex: "value",
         key: "value",
         width: "300px",
@@ -281,7 +281,7 @@ class ApplicationDetailsPage extends React.Component {
 
     return (
       <Card size="small" title={i18next.t("application:Environment Variables")} style={{marginBottom: 16}}>
-        <Table dataSource={this.state.details.credentials} columns={columns}
+        <Table dataSource={this.state.views.credentials} columns={columns}
           pagination={false} size="small" rowKey="name" />
       </Card>
     );
@@ -294,7 +294,7 @@ class ApplicationDetailsPage extends React.Component {
 
     if (this.state.application.status === "Not Deployed") {
       return (
-        <Card title={i18next.t("application:Application Details")} style={{margin: "0 32px"}}>
+        <Card title={i18next.t("general:Applications")} style={{margin: "0 32px"}}>
           <div style={{textAlign: "center", padding: "20px"}}>
             <Text type="secondary">{i18next.t("application:Not Deployed")}</Text>
           </div>
@@ -304,7 +304,7 @@ class ApplicationDetailsPage extends React.Component {
 
     if (this.state.error) {
       return (
-        <Card title={i18next.t("application:Application Details")} style={{margin: "0 32px"}}>
+        <Card title={i18next.t("general:Applications")} style={{margin: "0 32px"}}>
           <div style={{textAlign: "center", padding: "20px"}}>
             <Text type="danger">{i18next.t("general:Error")}: {this.state.error}</Text>
           </div>
@@ -323,4 +323,4 @@ class ApplicationDetailsPage extends React.Component {
   }
 }
 
-export default ApplicationDetailsPage;
+export default ApplicationViewPage;

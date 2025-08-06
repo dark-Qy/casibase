@@ -14,10 +14,7 @@
     "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions": "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions"
   },
   "application": {
-    "Access": "Access",
-    "Application Details": "Application Details",
     "Deploy": "Deploy",
-    "Deployments": "Deployments",
     "Edit Application": "Edit Application",
     "Environment Variables": "Environment Variables",
     "Failed": "Failed",
@@ -134,7 +131,6 @@
     "Avatar": "Avatar",
     "Avatar - Tooltip": "Icon URL for visual identification",
     "Back Home": "Back Home",
-    "Basic": "Basic",
     "Block": "Block",
     "Block - Tooltip": "Linked data block identifier",
     "Cancel": "Cancel",
@@ -348,7 +344,6 @@
     "Username - Tooltip": "Login username",
     "Users": "Users",
     "Users - Tooltip": "Participants",
-    "Value": "Value",
     "Vectors": "Vectors",
     "Vectors failed to generate": "Vectors failed to generate",
     "Vectors generated successfully": "Vectors generated successfully",

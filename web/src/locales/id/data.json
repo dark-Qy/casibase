@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Klik tombol \"Akun Saya\" di bawah ini untuk masuk ke halaman pengaturan Anda.",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Klik tombol \"Ubah kata sandi...\" untuk mengubah kata sandi Anda. Kemudian tutup halaman pengaturan.",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. Kembali ke halaman ini dan perbarui dengan menekan tombol F5. Pesan peringatan ini seharusnya akan hilang.",
     "4. If you encounter any issues, please contact your administrator.": "4. Jika Anda menghadapi masalah, silakan hubungi administrator Anda.",
     "My Account": "Akun Saya",
@@ -14,10 +14,7 @@
     "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions": "Sistem telah mendeteksi bahwa Anda menggunakan kata sandi default, yang tidak aman. Anda perlu mengubah kata sandi Anda segera. Berikut adalah petunjuknya"
   },
   "application": {
-    "Access": "Akses",
-    "Application Details": "Detail Aplikasi",
     "Deploy": "Terapkan",
-    "Deployments": "Penerapan",
     "Edit Application": "Edit Aplikasi",
     "Environment Variables": "Variabel Lingkungan",
     "Failed": "Gagal",
@@ -134,7 +131,6 @@
     "Avatar": "Avatar",
     "Avatar - Tooltip": "URL avatar",
     "Back Home": "Kembali ke halaman utama",
-    "Basic": "Dasar",
     "Block": "Blok",
     "Block - Tooltip": "Identifikasi blok data terkait",
     "Cancel": "Batal",
@@ -348,7 +344,6 @@
     "Username - Tooltip": "Nama pengguna masuk",
     "Users": "Pengguna",
     "Users - Tooltip": "Tambahkan peserta percakapan (pilihan berganda)",
-    "Value": "Nilai",
     "Vectors": "Vektor",
     "Vectors failed to generate": "Gagal menghasilkan vektor",
     "Vectors generated successfully": "Vektor berhasil dihasilkan",

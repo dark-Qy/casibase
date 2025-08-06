@@ -223,7 +223,7 @@ func (c *ApiController) DeployApplication() {
 
 	// Get application details to update access field
 	owner, name := util.GetOwnerAndNameFromId(id)
-	_, err = object.GetApplicationDetails(owner, name)
+	_, err = object.GetApplicationView(owner, name)
 	if err != nil {
 		c.ResponseError(err.Error())
 		return
@@ -285,18 +285,18 @@ func (c *ApiController) GetApplicationStatus() {
 	c.ResponseOk(status)
 }
 
-// GetApplicationDetails
-// @Title GetApplicationDetails
+// GetApplicationView
+// @Title GetApplicationView
 // @Tag Application API
-// @Description get application connection details
+// @Description get application connection view
 // @Param id query string true "The id (owner/name) of the application"
-// @Success 200 {object} object.ApplicationDetails The Response object
+// @Success 200 {object} object.ApplicationView The Response object
 // @router /get-application-details [get]
-func (c *ApiController) GetApplicationDetails() {
+func (c *ApiController) GetApplicationView() {
 	id := c.Input().Get("id")
 	owner, name := util.GetOwnerAndNameFromId(id)
 
-	details, err := object.GetApplicationDetails(owner, name)
+	details, err := object.GetApplicationView(owner, name)
 	if err != nil {
 		c.ResponseError(err.Error())
 		return

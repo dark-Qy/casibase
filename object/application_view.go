@@ -27,16 +27,16 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-type ApplicationDetails struct {
-	Services    []ServiceDetail    `json:"services"`
-	Credentials []EnvVariable      `json:"credentials"`
-	Deployments []DeploymentDetail `json:"deployments"`
-	Status      string             `json:"status"`
-	CreatedTime string             `json:"createdTime"`
-	Namespace   string             `json:"namespace"`
+type ApplicationView struct {
+	Services    []ServiceView    `json:"services"`
+	Credentials []EnvVariable    `json:"credentials"`
+	Deployments []DeploymentView `json:"deployments"`
+	Status      string           `json:"status"`
+	CreatedTime string           `json:"createdTime"`
+	Namespace   string           `json:"namespace"`
 }
 
-type ServiceDetail struct {
+type ServiceView struct {
 	Name         string        `json:"name"`
 	Type         string        `json:"type"`
 	ClusterIP    string        `json:"clusterIP"`
@@ -55,16 +55,16 @@ type ServicePort struct {
 	AccessURL string `json:"accessUrl,omitempty"`
 }
 
-type DeploymentDetail struct {
-	Name          string            `json:"name"`
-	Replicas      int32             `json:"replicas"`
-	ReadyReplicas int32             `json:"readyReplicas"`
-	Containers    []ContainerDetail `json:"containers"`
-	CreatedTime   string            `json:"createdTime"`
-	Status        string            `json:"status"`
+type DeploymentView struct {
+	Name          string          `json:"name"`
+	Replicas      int32           `json:"replicas"`
+	ReadyReplicas int32           `json:"readyReplicas"`
+	Containers    []ContainerView `json:"containers"`
+	CreatedTime   string          `json:"createdTime"`
+	Status        string          `json:"status"`
 }
 
-type ContainerDetail struct {
+type ContainerView struct {
 	Name      string           `json:"name"`
 	Image     string           `json:"image"`
 	Resources ResourceRequests `json:"resources"`
@@ -123,8 +123,8 @@ func parseK8sHost(configText string) (string, error) {
 	return host, nil
 }
 
-// GetApplicationDetails retrieves detailed connection information for an application
-func GetApplicationDetails(owner, name string) (*ApplicationDetails, error) {
+// GetApplicationView retrieves detailed connection information for an application
+func GetApplicationView(owner, name string) (*ApplicationView, error) {
 	if err := ensureK8sClient(); err != nil {
 		return nil, fmt.Errorf("failed to initialize k8s client: %v", err)
 	}
@@ -141,10 +141,10 @@ func GetApplicationDetails(owner, name string) (*ApplicationDetails, error) {
 	)
 	if err != nil {
 		if errors.IsNotFound(err) {
-			return &ApplicationDetails{
-				Services:    []ServiceDetail{},
+			return &ApplicationView{
+				Services:    []ServiceView{},
 				Credentials: []EnvVariable{},
-				Deployments: []DeploymentDetail{},
+				Deployments: []DeploymentView{},
 				Status:      StatusNotDeployed,
 				Namespace:   namespace,
 			}, nil
@@ -152,10 +152,10 @@ func GetApplicationDetails(owner, name string) (*ApplicationDetails, error) {
 		return nil, fmt.Errorf("failed to get namespace: %v", err)
 	}
 
-	details := &ApplicationDetails{
-		Services:    []ServiceDetail{},
+	details := &ApplicationView{
+		Services:    []ServiceView{},
 		Credentials: []EnvVariable{},
-		Deployments: []DeploymentDetail{},
+		Deployments: []DeploymentView{},
 		Status:      StatusRunning,
 		CreatedTime: ns.CreationTimestamp.Format("2006-01-02 15:04:05"),
 		Namespace:   namespace,
@@ -175,7 +175,7 @@ func GetApplicationDetails(owner, name string) (*ApplicationDetails, error) {
 		details.Credentials = credentials
 	}
 
-	updateAccess(owner, name, details.Services)
+	updateURL(owner, name, details.Services)
 
 	return details, nil
 }
@@ -213,7 +213,7 @@ func getNodeIPs() ([]string, error) {
 }
 
 // getServices retrieves all services in the application namespace with connection details
-func getServices(namespace string, nodeIPs []string) ([]ServiceDetail, error) {
+func getServices(namespace string, nodeIPs []string) ([]ServiceView, error) {
 	services, err := k8sClient.clientSet.CoreV1().Services(namespace).List(
 		context.TODO(), metav1.ListOptions{},
 	)
@@ -221,14 +221,14 @@ func getServices(namespace string, nodeIPs []string) ([]ServiceDetail, error) {
 		return nil, err
 	}
 
-	var serviceDetails []ServiceDetail
+	var serviceViews []ServiceView
 	for _, svc := range services.Items {
 		// Skip default kubernetes service
 		if svc.Name == "kubernetes" {
 			continue
 		}
 
-		detail := ServiceDetail{
+		view := ServiceView{
 			Name:         svc.Name,
 			Type:         string(svc.Spec.Type),
 			ClusterIP:    svc.Spec.ClusterIP,
@@ -244,7 +244,7 @@ func getServices(namespace string, nodeIPs []string) ([]ServiceDetail, error) {
 			if len(svc.Status.LoadBalancer.Ingress) > 0 {
 				ingress := svc.Status.LoadBalancer.Ingress[0]
 				if ingress.IP != "" {
-					detail.ExternalIP = ingress.IP
+					view.ExternalIP = ingress.IP
 					host = ingress.IP
 				} else if ingress.Hostname != "" {
 					host = ingress.Hostname
@@ -256,7 +256,7 @@ func getServices(namespace string, nodeIPs []string) ([]ServiceDetail, error) {
 			}
 		}
 
-		detail.ExternalHost = getExternalHost(host)
+		view.ExternalHost = getExternalHost(host)
 
 		for _, port := range svc.Spec.Ports {
 			servicePort := ServicePort{
@@ -267,22 +267,22 @@ func getServices(namespace string, nodeIPs []string) ([]ServiceDetail, error) {
 
 			if port.NodePort != 0 {
 				servicePort.NodePort = port.NodePort
-				if detail.ExternalHost != "" {
-					servicePort.AccessURL = fmt.Sprintf("%s:%d", detail.ExternalHost, port.NodePort)
+				if view.ExternalHost != "" {
+					servicePort.AccessURL = fmt.Sprintf("%s:%d", view.ExternalHost, port.NodePort)
 				}
 			}
 
-			detail.Ports = append(detail.Ports, servicePort)
+			view.Ports = append(view.Ports, servicePort)
 		}
 
-		serviceDetails = append(serviceDetails, detail)
+		serviceViews = append(serviceViews, view)
 	}
 
-	return serviceDetails, nil
+	return serviceViews, nil
 }
 
 // getDeployments retrieves all deployments in the application namespace with status
-func getDeployments(namespace string) ([]DeploymentDetail, error) {
+func getDeployments(namespace string) ([]DeploymentView, error) {
 	deployments, err := k8sClient.clientSet.AppsV1().Deployments(namespace).List(
 		context.TODO(), metav1.ListOptions{},
 	)
@@ -290,47 +290,47 @@ func getDeployments(namespace string) ([]DeploymentDetail, error) {
 		return nil, err
 	}
 
-	var deploymentDetails []DeploymentDetail
+	var deploymentViews []DeploymentView
 	for _, deployment := range deployments.Items {
-		detail := DeploymentDetail{
+		view := DeploymentView{
 			Name:          deployment.Name,
 			Replicas:      *deployment.Spec.Replicas,
 			ReadyReplicas: deployment.Status.ReadyReplicas,
-			Containers:    []ContainerDetail{},
+			Containers:    []ContainerView{},
 			CreatedTime:   deployment.CreationTimestamp.Format("2006-01-02 15:04:05"),
 		}
 
 		// Determine deployment status based on ready replicas
-		if detail.ReadyReplicas == detail.Replicas {
-			detail.Status = "Running"
-		} else if detail.ReadyReplicas > 0 {
-			detail.Status = "Partially Ready"
+		if view.ReadyReplicas == view.Replicas {
+			view.Status = "Running"
+		} else if view.ReadyReplicas > 0 {
+			view.Status = "Partially Ready"
 		} else {
-			detail.Status = "Not Ready"
+			view.Status = "Not Ready"
 		}
 
 		for _, container := range deployment.Spec.Template.Spec.Containers {
-			containerDetail := ContainerDetail{
+			containerView := ContainerView{
 				Name:  container.Name,
 				Image: container.Image,
 			}
 
 			if container.Resources.Requests != nil {
 				if cpuRequest := container.Resources.Requests[v1.ResourceCPU]; !cpuRequest.IsZero() {
-					containerDetail.Resources.CPU = cpuRequest.String()
+					containerView.Resources.CPU = cpuRequest.String()
 				}
 				if memoryRequest := container.Resources.Requests[v1.ResourceMemory]; !memoryRequest.IsZero() {
-					containerDetail.Resources.Memory = memoryRequest.String()
+					containerView.Resources.Memory = memoryRequest.String()
 				}
 			}
 
-			detail.Containers = append(detail.Containers, containerDetail)
+			view.Containers = append(view.Containers, containerView)
 		}
 
-		deploymentDetails = append(deploymentDetails, detail)
+		deploymentViews = append(deploymentViews, view)
 	}
 
-	return deploymentDetails, nil
+	return deploymentViews, nil
 }
 
 // getCredentials extracts environment variables containing sensitive information
@@ -385,24 +385,24 @@ func getCredentials(namespace string) ([]EnvVariable, error) {
 	return credentials, nil
 }
 
-// updateAccess updates application access URL with first available service endpoint
-func updateAccess(owner, name string, services []ServiceDetail) {
-	var accessURL string
+// updateURL updates application access URL with first available service endpoint
+func updateURL(owner, name string, services []ServiceView) {
+	var URL string
 	for _, service := range services {
 		for _, port := range service.Ports {
 			if port.AccessURL != "" {
-				accessURL = port.AccessURL
+				URL = port.AccessURL
 				break
 			}
 		}
-		if accessURL != "" {
+		if URL != "" {
 			break
 		}
 	}
 
-	if accessURL != "" {
+	if URL != "" {
 		if app, err := getApplication(owner, name); err == nil && app != nil {
-			app.Access = accessURL
+			app.URL = URL
 			if _, err := UpdateApplication(util.GetIdFromOwnerAndName(owner, name), app); err != nil {
 				// Log error but don't fail the main operation
 				fmt.Printf("Failed to update application access URL: %v\n", err)

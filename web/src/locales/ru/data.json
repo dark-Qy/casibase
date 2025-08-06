@@ -14,10 +14,7 @@
     "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions": "Система обнаружила, что вы используете стандартный пароль, который небезопасен. Необходимо немедленно изменить пароль. Вот инструкции"
   },
   "application": {
-    "Access": "Доступ",
-    "Application Details": "Сведения о приложении",
     "Deploy": "Развернуть",
-    "Deployments": "Развертывания",
     "Edit Application": "Редактировать приложение",
     "Environment Variables": "Переменные среды",
     "Failed": "Сбой",
@@ -134,7 +131,6 @@
     "Avatar": "Аватар",
     "Avatar - Tooltip": "URL-адрес аватара",
     "Back Home": "Вернуться на главную",
-    "Basic": "Основной",
     "Block": "Блок",
     "Block - Tooltip": "Идентификатор связанного блока данных",
     "Cancel": "Отменить",
@@ -348,7 +344,6 @@
     "Username - Tooltip": "Имя пользователя для входа",
     "Users": "Пользователи",
     "Users - Tooltip": "Добавить участников чата ( множественный выбор)",
-    "Value": "Значение",
     "Vectors": "Векторы",
     "Vectors failed to generate": "Векторы не удалось сгенерировать",
     "Vectors generated successfully": "Векторы успешно сгенерированы",

@@ -14,10 +14,7 @@
     "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions": "Le système a détecté que vous utilisez le mot de passe par défaut, qui n'est pas sécurisé. Vous devez modifier votre mot de passe immédiatement. Voici les instructions"
   },
   "application": {
-    "Access": "Accès",
-    "Application Details": "Détails de l'application",
     "Deploy": "Déployer",
-    "Deployments": "Déploiements",
     "Edit Application": "Modifier l'application",
     "Environment Variables": "Variables d'environnement",
     "Failed": "Échec",
@@ -134,7 +131,6 @@
     "Avatar": "Avatar",
     "Avatar - Tooltip": "URL de l'avatar",
     "Back Home": "Revenir à la page d'accueil",
-    "Basic": "De base",
     "Block": "Bloc",
     "Block - Tooltip": "Identifiant de bloc de données associé",
     "Cancel": "Annuler",
@@ -348,7 +344,6 @@
     "Username - Tooltip": "Nom d'utilisateur de connexion",
     "Users": "Utilisateurs",
     "Users - Tooltip": "Ajouter des participants au chat (multisélection)",
-    "Value": "Valeur",
     "Vectors": "Vecteurs",
     "Vectors failed to generate": "Échec de la génération de vecteurs",
     "Vectors generated successfully": "Génération de vecteurs réussie",

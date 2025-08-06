@@ -308,9 +308,9 @@ spec:
         },
       },
       {
-        title: i18next.t("application:Access"),
-        dataIndex: "access",
-        key: "access",
+        title: i18next.t("general:URL"),
+        dataIndex: "url",
+        key: "url",
         width: "140px",
         render: (text, record, index) => {
           if (!text || record.status === "Not Deployed") {

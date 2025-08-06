@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. 下記の「マイアカウント」ボタンをクリックして設定ページに移動してください。",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. 「パスワードを変更...」ボタンをクリックしてパスワードを変更してください。その後、設定ページを閉じてください。",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. このページに戻り、F5キーを押して更新してください。この警告メッセージが消えるはずです。",
     "4. If you encounter any issues, please contact your administrator.": "4. 問題が発生した場合は、管理者にご連絡ください。",
     "My Account": "マイアカウント",
@@ -14,10 +14,7 @@
     "The system has detected that you are using the default password, which is not secure. You need to modify your password immediately. Here are the instructions": "システムがデフォルトパスワードを使用していることを検出しました。これは安全ではありません。直ちにパスワードを変更する必要があります。以下は操作手順です"
   },
   "application": {
-    "Access": "アクセス",
-    "Application Details": "アプリケーション詳細",
     "Deploy": "デプロイ",
-    "Deployments": "デプロイメント",
     "Edit Application": "アプリケーションの編集",
     "Environment Variables": "環境変数",
     "Failed": "失敗",
@@ -134,7 +131,6 @@
     "Avatar": "アバター",
     "Avatar - Tooltip": "アバターに対応するURL",
     "Back Home": "ホームページに戻る",
-    "Basic": "基本",
     "Block": "ブロック",
     "Block - Tooltip": "関連データブロック識別子",
     "Cancel": "キャンセル",
@@ -348,7 +344,6 @@
     "Username - Tooltip": "ログインユーザー名",
     "Users": "ユーザー",
     "Users - Tooltip": "チャット参加者を追加（複数選択可）",
-    "Value": "値",
     "Vectors": "ベクトル",
     "Vectors failed to generate": "ベクトル生成に失敗しました",
     "Vectors generated successfully": "ベクトルが正常に生成されました",
