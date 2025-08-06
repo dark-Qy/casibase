@@ -20,7 +20,6 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/casibase/casibase/util"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -174,8 +173,6 @@ func GetApplicationView(owner, name string) (*ApplicationView, error) {
 	if credentials, err := getCredentials(namespace); err == nil {
 		details.Credentials = credentials
 	}
-
-	updateURL(owner, name, details.Services)
 
 	return details, nil
 }
@@ -383,30 +380,4 @@ func getCredentials(namespace string) ([]EnvVariable, error) {
 	}
 
 	return credentials, nil
-}
-
-// updateURL updates application access URL with first available service endpoint
-func updateURL(owner, name string, services []ServiceView) {
-	var URL string
-	for _, service := range services {
-		for _, port := range service.Ports {
-			if port.AccessURL != "" {
-				URL = port.AccessURL
-				break
-			}
-		}
-		if URL != "" {
-			break
-		}
-	}
-
-	if URL != "" {
-		if app, err := getApplication(owner, name); err == nil && app != nil {
-			app.URL = URL
-			if _, err := UpdateApplication(util.GetIdFromOwnerAndName(owner, name), app); err != nil {
-				// Log error but don't fail the main operation
-				fmt.Printf("Failed to update application access URL: %v\n", err)
-			}
-		}
-	}
 }

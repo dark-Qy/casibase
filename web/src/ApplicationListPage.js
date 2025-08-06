@@ -77,12 +77,10 @@ class ApplicationListPage extends BaseListPage {
   updateApplicationStatus(record) {
     ApplicationBackend.getApplicationStatus(`${record.owner}/${record.name}`)
       .then((statusRes) => {
-        // eslint-disable-next-line no-console
-        console.log(`Application status for ${record.name}:`, statusRes);
         if (statusRes && statusRes.status === "ok") {
           this.setState(prevState => ({
             data: prevState.data.map(item =>
-              item.name === record.name ? {...item, status: statusRes.data} : item
+              item.name === record.name ? {...item, status: statusRes.data, url: statusRes.data2} : item
             ),
           }));
         } else {

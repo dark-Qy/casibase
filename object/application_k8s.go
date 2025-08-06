@@ -209,6 +209,26 @@ func UndeployApplication(owner, name string) (bool, error) {
 	return true, nil
 }
 
+// GetURL retrieves the access URL for an application
+func GetURL(namespace string) (string, error) {
+	nodeIPs, _ := getNodeIPs()
+	services, err := getServices(namespace, nodeIPs)
+	if err != nil {
+		return "", fmt.Errorf("failed to get services: %v", err)
+	}
+
+	// Find first available access URL from services
+	for _, service := range services {
+		for _, port := range service.Ports {
+			if port.AccessURL != "" {
+				return port.AccessURL, nil
+			}
+		}
+	}
+
+	return "", fmt.Errorf("no accessible URL found for application")
+}
+
 func DeployApplicationSync(application *Application) (bool, error) {
 	// First deploy the application
 	success, err := DeployApplication(application)
@@ -247,6 +267,13 @@ func DeployApplicationSync(application *Application) (bool, error) {
 
 			switch status {
 			case StatusRunning:
+				if url, err := GetURL(application.Namespace); err == nil && url != "" {
+					application.URL = url
+					_, err := UpdateApplication(util.GetIdFromOwnerAndName(application.Owner, application.Name), application)
+					if err != nil {
+						return false, err
+					}
+				}
 				return true, nil
 			case StatusNotDeployed:
 				return false, fmt.Errorf("namespace %s is terminating and all resources have been cleaned up", application.Namespace)

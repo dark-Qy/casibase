@@ -220,15 +220,6 @@ func (c *ApiController) DeployApplication() {
 		c.ResponseError(err.Error())
 		return
 	}
-
-	// Get application details to update access field
-	owner, name := util.GetOwnerAndNameFromId(id)
-	_, err = object.GetApplicationView(owner, name)
-	if err != nil {
-		c.ResponseError(err.Error())
-		return
-	}
-
 	c.ResponseOk(success)
 }
 
@@ -281,8 +272,18 @@ func (c *ApiController) GetApplicationStatus() {
 		c.ResponseError(err.Error())
 		return
 	}
+	application, err := object.GetApplication(id)
+	if err != nil {
+		c.ResponseError(err.Error())
+		return
+	}
+	if application == nil {
+		c.ResponseError(fmt.Sprintf("The application: %s is not found", id))
+		return
+	}
+	url := application.URL
 
-	c.ResponseOk(status)
+	c.ResponseOk(status, url)
 }
 
 // GetApplicationView
