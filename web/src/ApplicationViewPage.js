@@ -28,7 +28,7 @@ class ApplicationViewPage extends React.Component {
     const application = props.application || (props.location && props.location.state ? props.location.state.application : null);
     this.state = {
       application: application,
-      views: null,
+      details: null,
       loading: false,
       error: null,
     };
@@ -47,7 +47,7 @@ class ApplicationViewPage extends React.Component {
 
   getView() {
     if (!this.state.application || this.state.application.status === "Not Deployed") {
-      this.setState({views: null, error: null});
+      this.setState({details: null, error: null});
       return;
     }
 
@@ -56,7 +56,7 @@ class ApplicationViewPage extends React.Component {
     ApplicationBackend.getApplicationView(this.state.application.owner, this.state.application.name)
       .then((res) => {
         if (res.status === "ok") {
-          this.setState({views: res.data, loading: false});
+          this.setState({details: res.data, loading: false});
         } else {
           this.setState({error: res.msg, loading: false});
         }
@@ -72,7 +72,7 @@ class ApplicationViewPage extends React.Component {
   };
 
   renderBasic() {
-    if (!this.state.views) {
+    if (!this.state.details) {
       return null;
     }
 
@@ -83,13 +83,13 @@ class ApplicationViewPage extends React.Component {
             <Text>{this.state.application.name}</Text>
           </Descriptions.Item>
           <Descriptions.Item label={i18next.t("general:Namespace")}>
-            <Text>{this.state.views.namespace}</Text>
+            <Text>{this.state.details.namespace}</Text>
           </Descriptions.Item>
           <Descriptions.Item label={i18next.t("general:Status")}>
-            {Setting.getApplicationStatusTag(this.state.views.status)}
+            {Setting.getApplicationStatusTag(this.state.details.status)}
           </Descriptions.Item>
           <Descriptions.Item label={i18next.t("general:Created time")}>
-            <Text>{this.state.views.createdTime}</Text>
+            <Text>{this.state.details.createdTime}</Text>
           </Descriptions.Item>
         </Descriptions>
       </Card>
@@ -97,7 +97,7 @@ class ApplicationViewPage extends React.Component {
   }
 
   renderDeployments() {
-    if (!this.state.views || !this.state.views.deployments || this.state.views.deployments.length === 0) {
+    if (!this.state.details || !this.state.details.deployments || this.state.details.deployments.length === 0) {
       return null;
     }
 
@@ -159,19 +159,19 @@ class ApplicationViewPage extends React.Component {
 
     return (
       <Card size="small" title={i18next.t("application:Deploy")} style={{marginBottom: 16}}>
-        <Table dataSource={this.state.views.deployments} columns={columns} pagination={false} size="small" rowKey="name" />
+        <Table dataSource={this.state.details.deployments} columns={columns} pagination={false} size="small" rowKey="name" />
       </Card>
     );
   }
 
   renderConnections() {
-    if (!this.state.views || !this.state.views.services || this.state.views.services.length === 0) {
+    if (!this.state.details || !this.state.details.services || this.state.details.services.length === 0) {
       return null;
     }
 
     return (
       <Card size="small" title={i18next.t("general:Connections")} style={{marginBottom: 16}}>
-        {this.state.views.services.map((service, index) => (
+        {this.state.details.services.map((service, index) => (
           <Card key={index} size="small"
             title={<span>{service.name}<Tag style={{marginLeft: 8}} color="blue">{service.type}</Tag></span>}
             style={{marginBottom: 12}} type="inner">
@@ -243,7 +243,7 @@ class ApplicationViewPage extends React.Component {
   }
 
   renderCredentials() {
-    if (!this.state.views || !this.state.views.credentials || this.state.views.credentials.length === 0) {
+    if (!this.state.details || !this.state.details.credentials || this.state.details.credentials.length === 0) {
       return null;
     }
 
@@ -280,8 +280,8 @@ class ApplicationViewPage extends React.Component {
     ];
 
     return (
-      <Card size="small" title={i18next.t("application:Parameters")} style={{marginBottom: 16}}>
-        <Table dataSource={this.state.views.credentials} columns={columns}
+      <Card size="small" title={i18next.t("application:Environment Variables")} style={{marginBottom: 16}}>
+        <Table dataSource={this.state.details.credentials} columns={columns}
           pagination={false} size="small" rowKey="name" />
       </Card>
     );
