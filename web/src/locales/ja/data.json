@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. 下記の「マイアカウント」ボタンをクリックして設定ページに移動してください。",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. 「パスワードを変更...」ボタンをクリックしてパスワードを変更してください。その後、設定ページを閉じてください。",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. このページに戻り、F5キーを押して更新してください。この警告メッセージが消えるはずです。",
     "4. If you encounter any issues, please contact your administrator.": "4. 問題が発生した場合は、管理者にご連絡ください。",
     "My Account": "マイアカウント",

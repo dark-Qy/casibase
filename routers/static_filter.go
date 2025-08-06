@@ -67,9 +67,9 @@ func StaticFilter(ctx *context.Context) {
 	}
 
 	if strings.HasPrefix(urlPath, "/storage") {
-		ctx.Output.Header("URL-Control-Allow-Origin", "*")
-		ctx.Output.Header("URL-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
-		ctx.Output.Header("URL-Control-Allow-Headers", "Content-Type, Authorization")
+		ctx.Output.Header("Access-Control-Allow-Origin", "*")
+		ctx.Output.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
+		ctx.Output.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
 		urlPath = strings.TrimPrefix(urlPath, "/storage/")
 		urlPath = strings.Replace(urlPath, "|", ":", 1)

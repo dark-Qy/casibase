@@ -1,7 +1,7 @@
 {
   "account": {
-    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. Go to your setting page by clicking on the below \"My Account\" button.",
-    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. Click \"Modify password...\" button to change your password. Then close the setting page.",
+    "1. Go to your setting page by clicking on the below \"My Account\" button.": "1. 아래의 \"내 계정\" 버튼을 클릭하여 설정 페이지로 이동하세요.",
+    "2. Click \"Modify password...\" button to change your password. Then close the setting page.": "2. \"비밀번호 변경...\" 버튼을 클릭하여 비밀번호를 변경하세요. 그런 다음 설정 페이지를 닫습니다.",
     "3. Go back to this page and refresh it by pressing F5 key. This alert message should be gone.": "3. 이 페이지로 돌아가 F5 키를 눌러 새로 고칩니다. 이 경고 메시지가 사라질 것입니다.",
     "4. If you encounter any issues, please contact your administrator.": "4. 문제가 발생하면 관리자에게 문의하세요.",
     "My Account": "내 계정",

@@ -204,7 +204,7 @@ func (p *GeminiModelProvider) calculatePrice(modelResult *ModelResult) error {
 
 func (p *GeminiModelProvider) QueryText(question string, writer io.Writer, history []*RawMessage, prompt string, knowledgeMessages []*RawMessage, agentInfo *AgentInfo) (*ModelResult, error) {
 	ctx := context.Background()
-	// URL your API key as an environment variable (see "Set up your API key" above)
+	// Access your API key as an environment variable (see "Set up your API key" above)
 	client, err := genai.NewClient(ctx,
 		&genai.ClientConfig{
 			APIKey:     p.secretKey,
