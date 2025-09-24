@@ -101,26 +101,31 @@ class ApplicationViewPage extends React.Component {
       <Card size="small" title={i18next.t("general:Usages")} style={{marginBottom: 16}}>
         <Row gutter={16}>
           <Col span={8}>
-            <Card size="small" type="inner">
+            <Card size="small" type="inner" style={{minHeight: 120}}>
               <Statistic title={i18next.t("system:CPU Usage")} value={metrics.cpuUsage} suffix={metrics.cpuPercentage > 0 ? `(${metrics.cpuPercentage.toFixed(1)}%)` : ""} />
-              {metrics.cpuPercentage > 0 && (
+              {metrics.cpuPercentage > 0 ? (
                 <Progress percent={metrics.cpuPercentage} size="small" strokeColor={getProgressColor(metrics.cpuPercentage)} showInfo={false} style={{marginTop: 8}} />
+              ) : (
+                <div style={{height: 14, marginTop: 8}}></div>
               )}
             </Card>
           </Col>
 
           <Col span={8}>
-            <Card size="small" type="inner">
+            <Card size="small" type="inner" style={{minHeight: 120}}>
               <Statistic title={i18next.t("system:Memory Usage")} value={metrics.memoryUsage} suffix={metrics.memoryPercentage > 0 ? `(${metrics.memoryPercentage.toFixed(1)}%)` : ""} />
-              {metrics.memoryPercentage > 0 && (
+              {metrics.memoryPercentage > 0 ? (
                 <Progress percent={metrics.memoryPercentage} size="small" strokeColor={getProgressColor(metrics.memoryPercentage)} showInfo={false} style={{marginTop: 8}} />
+              ) : (
+                <div style={{height: 14, marginTop: 8}}></div>
               )}
             </Card>
           </Col>
 
           <Col span={8}>
-            <Card size="small" type="inner">
+            <Card size="small" type="inner" style={{minHeight: 120}}>
               <Statistic title={i18next.t("general:Pods")} value={metrics.podCount} />
+              <div style={{height: 14, marginTop: 8}}></div>
             </Card>
           </Col>
         </Row>
